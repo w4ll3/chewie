@@ -186,6 +186,10 @@ class ChewieController extends ChangeNotifier {
     this.isLive = false,
     this.allowFullScreen = true,
     this.allowMuting = true,
+    this.showPlayPause = true,
+    this.showCurrentTimestamp = true,
+    this.showFinalTimestamp = true,
+    this.livePlaceHolder,
     this.systemOverlaysAfterFullScreen = SystemUiOverlay.values,
     this.deviceOrientationsAfterFullScreen = const [
       DeviceOrientation.portraitUp,
@@ -198,6 +202,18 @@ class ChewieController extends ChangeNotifier {
             'You must provide a controller to play a video') {
     _initialize();
   }
+
+  /// Widget to display on top right corner when video is live
+  final Widget livePlaceHolder;
+
+  /// If you want to display play/pause button in the control bar
+  final bool showPlayPause;
+
+  /// If you want to the current timestamp to be shown;
+  final bool showCurrentTimestamp;
+
+  /// If you want to the final timestamp to be shown;
+  final bool showFinalTimestamp;
 
   /// The controller for the video you want to play
   final VideoPlayerController videoPlayerController;

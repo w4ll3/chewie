@@ -77,9 +77,13 @@ class _CupertinoControlsState extends State<CupertinoControls> {
           absorbing: _hideStuff,
           child: Column(
             children: <Widget>[
-              _buildTopBar(backgroundColor, iconColor, barHeight, buttonPadding),
+              if (chewieController.isLive)
+                Align(
+                  alignment: Alignment.topRight,
+                  child: chewieController.livePlaceHolder ?? Container(),
+                ),
               _buildHitArea(),
-              _buildBottomBar(backgroundColor, iconColor, barHeight),
+              _buildBottomBar(Colors.transparent, Colors.white, barHeight),
             ],
           ),
         ),
@@ -126,40 +130,58 @@ class _CupertinoControlsState extends State<CupertinoControls> {
         color: Colors.transparent,
         alignment: Alignment.bottomCenter,
         margin: EdgeInsets.all(marginSize),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(10.0),
-          child: BackdropFilter(
-            filter: ui.ImageFilter.blur(
-              sigmaX: 10.0,
-              sigmaY: 10.0,
-            ),
-            child: Container(
-              height: barHeight,
-              color: backgroundColor,
-              child: chewieController.isLive
-                  ? Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Container(
+          height: barHeight,
+          color: backgroundColor,
+          child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  if (!chewieController.isLive)
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        _buildPlayPause(controller, iconColor, barHeight),
-                        _buildLive(iconColor),
-                      ],
-                    )
-                  : Row(
-                      children: <Widget>[
-                        _buildSkipBack(iconColor, barHeight),
-                        _buildPlayPause(controller, iconColor, barHeight),
-                        _buildSkipForward(iconColor, barHeight),
-                        _buildPosition(iconColor),
-                        _buildProgressBar(),
-                        _buildRemaining(iconColor)
+                        if (chewieController.showPlayPause)
+                          _buildPlayPause(),
+                        if (chewieController.showCurrentTimestamp)
+                          _buildPosition(iconColor),
                       ],
                     ),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      if (!chewieController.isLive)
+                        if (chewieController.showFinalTimestamp)
+                          _buildRemaining(iconColor),
+                      if (chewieController.allowFullScreen)
+                        _buildExpandButton(iconColor),
+                    ],
+                  )
+                ],
+              ),
             ),
-          ),
+            if (!chewieController.isLive) _buildProgressBar(),
+          ],
         ),
       ),
     );
   }
+
+                    // _buildSkipBack(iconColor, barHeight),
+                    // _buildPlayPause(controller, iconColor, barHeight),
+                    // _buildSkipForward(iconColor, barHeight),
+                    // _buildPosition(iconColor),
+                    // _buildProgressBar(),
+                    // _buildRemaining(iconColor)
 
   Widget _buildLive(Color iconColor) {
     return Padding(
@@ -172,36 +194,22 @@ class _CupertinoControlsState extends State<CupertinoControls> {
   }
 
   GestureDetector _buildExpandButton(
-    Color backgroundColor,
     Color iconColor,
-    double barHeight,
-    double buttonPadding,
   ) {
     return GestureDetector(
       onTap: _onExpandCollapse,
       child: AnimatedOpacity(
         opacity: _hideStuff ? 0.0 : 1.0,
         duration: Duration(milliseconds: 300),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(10.0),
-          child: BackdropFilter(
-            filter: ui.ImageFilter.blur(sigmaX: 10.0),
-            child: Container(
-              height: barHeight,
-              padding: EdgeInsets.only(
-                left: buttonPadding,
-                right: buttonPadding,
-              ),
-              color: backgroundColor,
-              child: Center(
-                child: Icon(
-                  chewieController.isFullScreen
-                      ? OpenIconicIcons.fullscreenExit
-                      : OpenIconicIcons.fullscreenEnter,
-                  color: iconColor,
-                  size: 12.0,
-                ),
-              ),
+        child: Container(
+          color: Colors.transparent,
+          child: Center(
+            child: Icon(
+              chewieController.isFullScreen
+                  ? OpenIconicIcons.fullscreenExit
+                  : OpenIconicIcons.fullscreenEnter,
+              color: iconColor,
+              size: 12.0,
             ),
           ),
         ),

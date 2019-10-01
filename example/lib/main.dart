@@ -36,23 +36,39 @@ class _ChewieDemoState extends State<ChewieDemo> {
         'https://www.sample-videos.com/video123/mp4/480/asdasdas.mp4');
     _chewieController = ChewieController(
       videoPlayerController: _videoPlayerController1,
-      aspectRatio: 3 / 2,
+      aspectRatio: 16 / 9,
       autoPlay: true,
+      showPlayPause: false,
+      showCurrentTimestamp: true,
+      showFinalTimestamp: false,
       looping: true,
-      // Try playing around with some of these other options:
-
-      // showControls: false,
-      // materialProgressColors: ChewieProgressColors(
-      //   playedColor: Colors.red,
-      //   handleColor: Colors.blue,
-      //   backgroundColor: Colors.grey,
-      //   bufferedColor: Colors.lightGreen,
-      // ),
-      // placeholder: Container(
-      //   color: Colors.grey,
-      // ),
-      // autoInitialize: true,
+      allowMuting: false,
+      cupertinoProgressColors: ChewieProgressColors(
+        backgroundColor: Color(0xFFEDFF00).withAlpha(30),
+        playedColor: Color(0xFFEDFF00),
+        handleColor: Color(0xFFEDFF00),
+        bufferedColor: Color(0xFFEDFF00).withAlpha(70),
+      ),
+      materialProgressColors: ChewieProgressColors(
+        backgroundColor: Color(0xFFEDFF00).withAlpha(30),
+        playedColor: Color(0xFFEDFF00),
+        handleColor: Color(0xFFEDFF00),
+        bufferedColor: Color(0xFFEDFF00).withAlpha(70),
+      ),
     );
+    // ChewieController(
+    //   videoPlayerController: _videoPlayerController1,
+    //   aspectRatio: 3 / 2,
+    //   autoPlay: true,
+    //   looping: true,
+    // Try playing around with some of these other options:
+
+    // showControls: false,
+    // placeholder: Container(
+    //   color: Colors.grey,
+    // ),
+    // autoInitialize: true,
+    // );
   }
 
   @override
@@ -123,6 +139,9 @@ class _ChewieDemoState extends State<ChewieDemo> {
                           videoPlayerController: _videoPlayerController2,
                           aspectRatio: 3 / 2,
                           autoPlay: true,
+                          showPlayPause: false,
+                          showCurrentTimestamp: true,
+                          showFinalTimestamp: false,
                           looping: true,
                         );
                       });

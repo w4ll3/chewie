@@ -7,7 +7,7 @@ authors:
   - Ben Hagen <ben@ottomatic.io>
 
 environment:
-  sdk: ">=2.0.0-dev.28.0 <3.0.0"
+  sdk: ">=2.2.2 <3.0.0"
 
 dependencies:
   open_iconic_flutter: ">=0.3.0 <0.4.0"
