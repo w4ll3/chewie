@@ -329,7 +329,8 @@ class ChewieController extends ChangeNotifier {
   void _fullScreenListener() async {
     if (videoPlayerController.value.isPlaying && !_isFullScreen) {
       enterFullScreen();
-      videoPlayerController.removeListener(_fullScreenListener);
+    } else {
+      exitFullScreen();
     }
   }
 
