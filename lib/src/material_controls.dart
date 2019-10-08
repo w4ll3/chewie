@@ -122,6 +122,7 @@ class _MaterialControlsState extends State<MaterialControls> {
         color: Colors.transparent,
         child: Column(
           mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.only(left: 8.0),
@@ -138,8 +139,12 @@ class _MaterialControlsState extends State<MaterialControls> {
                         if (chewieController.showPlayPause)
                           _buildPlayPause(controller),
                         if (chewieController.showCurrentTimestamp)
-                          _buildCurrentTimestamp(iconColor),
+                          _buildPosition(iconColor),
                       ],
+                    ),
+                  if (chewieController.isLive)
+                    Expanded(
+                      child: Container(),
                     ),
                   Row(
                     mainAxisSize: MainAxisSize.max,
@@ -148,16 +153,24 @@ class _MaterialControlsState extends State<MaterialControls> {
                     children: <Widget>[
                       if (!chewieController.isLive)
                         if (chewieController.showFinalTimestamp)
-                          _buildPosition(iconColor),
+                          _buildRemaining(iconColor),
                       if (chewieController.allowMuting)
                         _buildMuteButton(controller),
-                      if (chewieController.allowFullScreen) _buildRemaining(),
+                      if (chewieController.allowFullScreen)
+                        Container(
+                          height: barHeight,
+                          padding: EdgeInsets.only(
+                            left: 8.0,
+                            right: 8.0,
+                          ),
+                          child: _buildExpandButton(),
+                        ),
                     ],
                   )
                 ],
               ),
             ),
-            if (!chewieController.isLive) _buildProgressBar(),
+            _buildProgressBar(),
           ],
         ),
       ),
@@ -167,17 +180,14 @@ class _MaterialControlsState extends State<MaterialControls> {
   GestureDetector _buildExpandButton() {
     return GestureDetector(
       onTap: _onExpandCollapse,
-      child: Container(
-        height: barHeight,
-        padding: EdgeInsets.only(
-          left: 8.0,
-          right: 8.0,
-        ),
+      child: Padding(
+        padding: const EdgeInsets.only(right: 16.0),
         child: Center(
           child: Icon(
             chewieController.isFullScreen
                 ? Icons.fullscreen_exit
                 : Icons.fullscreen,
+            color: Colors.white,
           ),
         ),
       ),
@@ -287,10 +297,12 @@ class _MaterialControlsState extends State<MaterialControls> {
         ? _latestValue.position
         : Duration.zero;
 
-    return Text(
-      '${formatDuration(position)}',
-      style: TextStyle(
-        fontSize: 14.0,
+    return Padding(
+      padding: const EdgeInsets.only(left: 16.0),
+      child: Text(
+        '${formatDuration(position)}',
+        style:
+            Theme.of(context).textTheme.caption.copyWith(color: Colors.white),
       ),
     );
   }
@@ -394,6 +406,7 @@ class _MaterialControlsState extends State<MaterialControls> {
     return Expanded(
       child: MaterialVideoProgressBar(
         controller,
+        isLive: chewieController.isLive,
         onDragStart: () {
           setState(() {
             _dragging = true;

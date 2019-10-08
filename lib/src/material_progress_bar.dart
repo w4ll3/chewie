@@ -10,6 +10,7 @@ class MaterialVideoProgressBar extends StatefulWidget {
     this.onDragEnd,
     this.onDragStart,
     this.onDragUpdate,
+    this.isLive,
   }) : colors = colors ?? ChewieProgressColors();
 
   final VideoPlayerController controller;
@@ -17,6 +18,7 @@ class MaterialVideoProgressBar extends StatefulWidget {
   final Function() onDragStart;
   final Function() onDragEnd;
   final Function() onDragUpdate;
+  final bool isLive;
 
   @override
   _VideoProgressBarState createState() {
@@ -68,6 +70,7 @@ class _VideoProgressBarState extends State<MaterialVideoProgressBar> {
             painter: _ProgressBarPainter(
               controller.value,
               widget.colors,
+              widget.isLive,
             ),
           ),
         ),
@@ -115,10 +118,11 @@ class _VideoProgressBarState extends State<MaterialVideoProgressBar> {
 }
 
 class _ProgressBarPainter extends CustomPainter {
-  _ProgressBarPainter(this.value, this.colors);
+  _ProgressBarPainter(this.value, this.colors, this.isLive);
 
   VideoPlayerValue value;
   ChewieProgressColors colors;
+  bool isLive;
 
   @override
   bool shouldRepaint(CustomPainter painter) {

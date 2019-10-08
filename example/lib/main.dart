@@ -43,6 +43,11 @@ class _ChewieDemoState extends State<ChewieDemo> {
       showFinalTimestamp: false,
       looping: true,
       allowMuting: false,
+      allowFullScreen: true,
+      isLive: true,
+      livePlaceHolder: Container(
+        color: Colors.red,
+      ),
       cupertinoProgressColors: ChewieProgressColors(
         backgroundColor: Color(0xFFEDFF00).withAlpha(30),
         playedColor: Color(0xFFEDFF00),
@@ -56,19 +61,6 @@ class _ChewieDemoState extends State<ChewieDemo> {
         bufferedColor: Color(0xFFEDFF00).withAlpha(70),
       ),
     );
-    // ChewieController(
-    //   videoPlayerController: _videoPlayerController1,
-    //   aspectRatio: 3 / 2,
-    //   autoPlay: true,
-    //   looping: true,
-    // Try playing around with some of these other options:
-
-    // showControls: false,
-    // placeholder: Container(
-    //   color: Colors.grey,
-    // ),
-    // autoInitialize: true,
-    // );
   }
 
   @override

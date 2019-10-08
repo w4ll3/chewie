@@ -134,11 +134,9 @@ class _CupertinoControlsState extends State<CupertinoControls> {
           height: barHeight,
           color: backgroundColor,
           child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0),
-              child: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              Row(
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -149,7 +147,10 @@ class _CupertinoControlsState extends State<CupertinoControls> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         if (chewieController.showPlayPause)
-                          _buildPlayPause(),
+                          _buildPlayPause(
+                              chewieController.videoPlayerController,
+                              Colors.black,
+                              36),
                         if (chewieController.showCurrentTimestamp)
                           _buildPosition(iconColor),
                       ],
@@ -168,20 +169,13 @@ class _CupertinoControlsState extends State<CupertinoControls> {
                   )
                 ],
               ),
-            ),
-            if (!chewieController.isLive) _buildProgressBar(),
-          ],
+              if (!chewieController.isLive) _buildProgressBar(),
+            ],
+          ),
         ),
       ),
     );
   }
-
-                    // _buildSkipBack(iconColor, barHeight),
-                    // _buildPlayPause(controller, iconColor, barHeight),
-                    // _buildSkipForward(iconColor, barHeight),
-                    // _buildPosition(iconColor),
-                    // _buildProgressBar(),
-                    // _buildRemaining(iconColor)
 
   Widget _buildLive(Color iconColor) {
     return Padding(
@@ -404,7 +398,8 @@ class _CupertinoControlsState extends State<CupertinoControls> {
         children: <Widget>[
           chewieController.allowFullScreen
               ? _buildExpandButton(
-                  backgroundColor, iconColor, barHeight, buttonPadding)
+                  iconColor,
+                )
               : Container(),
           Expanded(child: Container()),
           chewieController.allowMuting
