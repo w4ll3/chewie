@@ -279,7 +279,7 @@ class _MaterialControlsState extends State<MaterialControls> {
       onTap: _playPause,
       child: Container(
         height: barHeight,
-        color: Colors.red,
+        color: Colors.transparent,
         margin: EdgeInsets.only(left: 8.0, right: 4.0),
         padding: EdgeInsets.only(
           left: 12.0,
