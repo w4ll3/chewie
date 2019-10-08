@@ -287,6 +287,7 @@ class _MaterialControlsState extends State<MaterialControls> {
         ),
         child: Icon(
           controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+          color: Colors.white,
         ),
       ),
     );
@@ -316,7 +317,8 @@ class _MaterialControlsState extends State<MaterialControls> {
       padding: EdgeInsets.only(right: 12.0),
       child: Text(
         '-${formatDuration(position)}',
-        style: TextStyle(color: iconColor, fontSize: 12.0),
+        style:
+            Theme.of(context).textTheme.caption.copyWith(color: Colors.white),
       ),
     );
   }
