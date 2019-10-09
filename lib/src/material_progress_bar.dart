@@ -63,7 +63,7 @@ class _VideoProgressBarState extends State<MaterialVideoProgressBar> {
     return GestureDetector(
       child: Center(
         child: Container(
-          height: MediaQuery.of(context).size.height / 2,
+          height: 4,
           width: MediaQuery.of(context).size.width,
           color: Colors.transparent,
           child: CustomPaint(
@@ -131,7 +131,7 @@ class _ProgressBarPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final height = 2.0;
+    final height = 4.0;
 
     canvas.drawRRect(
       RRect.fromRectAndRadius(
