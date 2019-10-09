@@ -74,10 +74,7 @@ class _MaterialControlsState extends State<MaterialControls> {
                       ),
                     )
                   : _buildHitArea(),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
-                child: _buildBottomBar(context),
-              ),
+              _buildBottomBar(context),
             ],
           ),
         ),
@@ -145,10 +142,7 @@ class _MaterialControlsState extends State<MaterialControls> {
                           _buildPosition(iconColor),
                       ],
                     ),
-                  if (chewieController.isLive)
-                    Expanded(
-                      child: Container(),
-                    ),
+                  _buildProgressBar(),
                   Row(
                     mainAxisSize: MainAxisSize.max,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -173,7 +167,6 @@ class _MaterialControlsState extends State<MaterialControls> {
                 ],
               ),
             ),
-            _buildProgressBar(),
           ],
         ),
       ),
