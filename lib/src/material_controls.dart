@@ -149,10 +149,14 @@ class _MaterialControlsState extends State<MaterialControls> {
                 if (chewieController.allowFullScreen)
                   Container(
                     height: barHeight,
-                    padding: EdgeInsets.only(
-                      left: 8.0,
-                      right: 8.0,
-                    ),
+                    padding: chewieController.isLive
+                        ? const EdgeInsets.only(
+                            left: 24.0,
+                            right: 8.0,
+                          )
+                        : const EdgeInsets.symmetric(
+                            horizontal: 16.0,
+                          ),
                     child: _buildExpandButton(),
                   ),
               ],
@@ -166,15 +170,12 @@ class _MaterialControlsState extends State<MaterialControls> {
   GestureDetector _buildExpandButton() {
     return GestureDetector(
       onTap: _onExpandCollapse,
-      child: Padding(
-        padding: const EdgeInsets.only(right: 16.0),
-        child: Center(
-          child: Icon(
-            chewieController.isFullScreen
-                ? Icons.fullscreen_exit
-                : Icons.fullscreen,
-            color: Colors.white,
-          ),
+      child: Center(
+        child: Icon(
+          chewieController.isFullScreen
+              ? Icons.fullscreen_exit
+              : Icons.fullscreen,
+          color: Colors.white,
         ),
       ),
     );
@@ -203,7 +204,7 @@ class _MaterialControlsState extends State<MaterialControls> {
           color: Colors.transparent,
           child: Center(
             child: AnimatedOpacity(
-              opacity: _hideStuff ? 1.0 : 0.0,
+              opacity: _hideStuff ? 0.0 : 1.0,
               duration: Duration(milliseconds: 500),
               child: GestureDetector(
                 child: Container(
@@ -285,7 +286,7 @@ class _MaterialControlsState extends State<MaterialControls> {
         : Duration.zero;
 
     return Padding(
-      padding: const EdgeInsets.only(left: 16.0),
+      padding: const EdgeInsets.only(right: 16.0),
       child: Text(
         '${formatDuration(position)}',
         style:
@@ -300,7 +301,7 @@ class _MaterialControlsState extends State<MaterialControls> {
         : Duration(seconds: 0);
 
     return Padding(
-      padding: EdgeInsets.only(right: 12.0),
+      padding: EdgeInsets.only(left: 12.0),
       child: Text(
         '-${formatDuration(position)}',
         style:
