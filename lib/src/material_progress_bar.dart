@@ -64,7 +64,9 @@ class _VideoProgressBarState extends State<MaterialVideoProgressBar> {
       child: Center(
         child: Container(
           height: 4,
-          width: MediaQuery.of(context).size.width / 2,
+          width: widget.isLive
+              ? MediaQuery.of(context).size.width - 72
+              : MediaQuery.of(context).size.width / 1.75,
           color: Colors.transparent,
           child: CustomPaint(
             painter: _ProgressBarPainter(

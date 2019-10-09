@@ -202,15 +202,23 @@ class _MaterialControlsState extends State<MaterialControls> {
         child: Container(
           color: Colors.transparent,
           child: Center(
-            child: GestureDetector(
-              child: Container(
-                padding: EdgeInsets.only(
-                  right: 12.0,
-                  left: 12.0,
-                  top: barHeight + 12.0,
-                  bottom: 12.0,
+            child: AnimatedOpacity(
+              opacity: _hideStuff && !_dragging ? 1.0 : 0.0,
+              duration: Duration(milliseconds: 500),
+              child: GestureDetector(
+                child: Container(
+                  padding: EdgeInsets.only(
+                    right: 12.0,
+                    left: 12.0,
+                    top: barHeight + 12.0,
+                    bottom: 12.0,
+                  ),
+                  child: Icon(
+                    Icons.play_arrow,
+                    size: 32.0,
+                    color: Colors.white,
+                  ),
                 ),
-                child: Icon(Icons.play_arrow, size: 32.0),
               ),
             ),
           ),
