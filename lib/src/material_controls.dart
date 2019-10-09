@@ -200,7 +200,7 @@ class _MaterialControlsState extends State<MaterialControls> {
           }
         },
         child: Container(
-          color: Colors.transparent,
+          color: Colors.red,
           child: Center(
             child: AnimatedOpacity(
               opacity:
