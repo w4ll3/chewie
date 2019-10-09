@@ -119,7 +119,7 @@ class _MaterialControlsState extends State<MaterialControls> {
 
     return AnimatedOpacity(
       opacity: _hideStuff ? 0.0 : 1.0,
-      duration: Duration(milliseconds: 300),
+      duration: Duration(milliseconds: 500),
       child: Container(
         height: barHeight,
         color: Colors.transparent,
@@ -408,31 +408,29 @@ class _MaterialControlsState extends State<MaterialControls> {
   }
 
   Widget _buildProgressBar() {
-    return Expanded(
-      child: MaterialVideoProgressBar(
-        controller,
-        isLive: chewieController.isLive,
-        onDragStart: () {
-          setState(() {
-            _dragging = true;
-          });
+    return MaterialVideoProgressBar(
+      controller,
+      isLive: chewieController.isLive,
+      onDragStart: () {
+        setState(() {
+          _dragging = true;
+        });
 
-          _hideTimer?.cancel();
-        },
-        onDragEnd: () {
-          setState(() {
-            _dragging = false;
-          });
+        _hideTimer?.cancel();
+      },
+      onDragEnd: () {
+        setState(() {
+          _dragging = false;
+        });
 
-          _startHideTimer();
-        },
-        colors: chewieController.materialProgressColors ??
-            ChewieProgressColors(
-                playedColor: Theme.of(context).accentColor,
-                handleColor: Theme.of(context).accentColor,
-                bufferedColor: Theme.of(context).backgroundColor,
-                backgroundColor: Theme.of(context).disabledColor),
-      ),
+        _startHideTimer();
+      },
+      colors: chewieController.materialProgressColors ??
+          ChewieProgressColors(
+              playedColor: Theme.of(context).accentColor,
+              handleColor: Theme.of(context).accentColor,
+              bufferedColor: Theme.of(context).backgroundColor,
+              backgroundColor: Theme.of(context).disabledColor),
     );
   }
 }
