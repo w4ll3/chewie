@@ -120,53 +120,43 @@ class _MaterialControlsState extends State<MaterialControls> {
       child: Container(
         height: barHeight,
         color: Colors.transparent,
-        child: Column(
+        child: Row(
           mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
+            if (!chewieController.isLive)
+              Row(
+                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  if (!chewieController.isLive)
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        if (chewieController.showPlayPause)
-                          _buildPlayPause(controller),
-                        if (chewieController.showCurrentTimestamp)
-                          _buildPosition(iconColor),
-                      ],
-                    ),
-                  _buildProgressBar(),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      if (!chewieController.isLive)
-                        if (chewieController.showFinalTimestamp)
-                          _buildRemaining(iconColor),
-                      if (chewieController.allowMuting)
-                        _buildMuteButton(controller),
-                      if (chewieController.allowFullScreen)
-                        Container(
-                          height: barHeight,
-                          padding: EdgeInsets.only(
-                            left: 8.0,
-                            right: 8.0,
-                          ),
-                          child: _buildExpandButton(),
-                        ),
-                    ],
-                  )
+                  if (chewieController.showPlayPause)
+                    _buildPlayPause(controller),
+                  if (chewieController.showCurrentTimestamp)
+                    _buildPosition(iconColor),
                 ],
               ),
-            ),
+            _buildProgressBar(),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                if (!chewieController.isLive)
+                  if (chewieController.showFinalTimestamp)
+                    _buildRemaining(iconColor),
+                if (chewieController.allowMuting) _buildMuteButton(controller),
+                if (chewieController.allowFullScreen)
+                  Container(
+                    height: barHeight,
+                    padding: EdgeInsets.only(
+                      left: 8.0,
+                      right: 8.0,
+                    ),
+                    child: _buildExpandButton(),
+                  ),
+              ],
+            )
           ],
         ),
       ),
