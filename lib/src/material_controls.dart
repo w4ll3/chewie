@@ -200,25 +200,17 @@ class _MaterialControlsState extends State<MaterialControls> {
           }
         },
         child: Container(
-          color: Colors.red,
+          color: Colors.transparent,
           child: Center(
-            child: AnimatedOpacity(
-              opacity:
-                  _latestValue != null && !_latestValue.isPlaying && !_dragging
-                      ? 1.0
-                      : 0.0,
-              duration: Duration(milliseconds: 300),
-              child: GestureDetector(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).dialogBackgroundColor,
-                    borderRadius: BorderRadius.circular(48.0),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(12.0),
-                    child: Icon(Icons.play_arrow, size: 32.0),
-                  ),
+            child: GestureDetector(
+              child: Container(
+                padding: EdgeInsets.only(
+                  right: 12.0,
+                  left: 12.0,
+                  top: barHeight + 12.0,
+                  bottom: 12.0,
                 ),
+                child: Icon(Icons.play_arrow, size: 32.0),
               ),
             ),
           ),
