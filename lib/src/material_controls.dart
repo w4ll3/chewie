@@ -184,40 +184,42 @@ class _MaterialControlsState extends State<MaterialControls> {
   Expanded _buildHitArea() {
     return Expanded(
       child: GestureDetector(
-        onTap: () {
-          if (_latestValue != null && _latestValue.isPlaying) {
-            if (_displayTapped) {
-              setState(() {
-                _hideStuff = true;
-              });
-            } else
-              _cancelAndRestartTimer();
-          } else {
-            _playPause();
-
-            setState(() {
-              _hideStuff = true;
-            });
-          }
-        },
+        onTap: _latestValue != null && _latestValue.isPlaying
+            ? () {
+                _playPause();
+                //_cancelAndRestartTimer;
+                setState(() {
+                  _hideStuff = false;
+                });
+              }
+            : () {
+                _playPause();
+                setState(() {
+                  _hideStuff = true;
+                });
+              },
         child: Container(
           color: Colors.transparent,
           child: Center(
             child: AnimatedOpacity(
-              opacity: _hideStuff ? 0.0 : 1.0,
-              duration: Duration(milliseconds: 500),
+              opacity:
+                  _latestValue != null && !_latestValue.isPlaying && !_dragging
+                      ? 1.0
+                      : 0.0,
+              duration: Duration(milliseconds: 300),
               child: GestureDetector(
                 child: Container(
-                  padding: EdgeInsets.only(
-                    right: 12.0,
-                    left: 12.0,
-                    top: barHeight,
-                    bottom: 12.0,
+                  decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.circular(48.0),
                   ),
-                  child: Icon(
-                    Icons.play_arrow,
-                    size: 32.0,
-                    color: Colors.white,
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 30.0),
+                    child: Icon(
+                      Icons.play_arrow,
+                      size: 50.0,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
