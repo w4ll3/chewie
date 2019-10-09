@@ -53,17 +53,19 @@ class _VideoProgressBarState extends State<MaterialVideoProgressBar> {
   @override
   Widget build(BuildContext context) {
     void seekToRelativePosition(Offset globalPosition) {
-      final box = context.findRenderObject() as RenderBox;
-      final Offset tapPos = box.globalToLocal(globalPosition);
-      final double relative = tapPos.dx / box.size.width;
-      final Duration position = controller.value.duration * relative;
-      controller.seekTo(position);
+      if (!widget.isLive) {
+        final box = context.findRenderObject() as RenderBox;
+        final Offset tapPos = box.globalToLocal(globalPosition);
+        final double relative = tapPos.dx / box.size.width;
+        final Duration position = controller.value.duration * relative;
+        controller.seekTo(position);
+      }
     }
 
     return GestureDetector(
       child: Center(
         child: Container(
-          height: 4,
+          height: 24.0,
           width: widget.isLive
               ? MediaQuery.of(context).size.width - 72
               : MediaQuery.of(context).size.width / 1.75,
