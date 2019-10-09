@@ -136,7 +136,7 @@ class _ProgressBarPainter extends CustomPainter {
     canvas.drawRRect(
       RRect.fromRectAndRadius(
         Rect.fromPoints(
-          Offset(0.0, size.height / 2),
+          Offset(0.0, size.height / 4),
           Offset(size.width, size.height / 2 + height),
         ),
         Radius.circular(4.0),

@@ -74,7 +74,10 @@ class _MaterialControlsState extends State<MaterialControls> {
                       ),
                     )
                   : _buildHitArea(),
-              _buildBottomBar(context),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: _buildBottomBar(context),
+              ),
             ],
           ),
         ),
