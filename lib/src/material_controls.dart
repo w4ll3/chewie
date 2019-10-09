@@ -123,7 +123,7 @@ class _MaterialControlsState extends State<MaterialControls> {
         child: Row(
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             if (!chewieController.isLive)
               Row(
