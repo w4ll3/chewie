@@ -149,14 +149,6 @@ class _MaterialControlsState extends State<MaterialControls> {
                 if (chewieController.allowFullScreen)
                   Container(
                     height: barHeight,
-                    padding: chewieController.isLive
-                        ? const EdgeInsets.only(
-                            left: 24.0,
-                            right: 8.0,
-                          )
-                        : const EdgeInsets.symmetric(
-                            horizontal: 16.0,
-                          ),
                     child: _buildExpandButton(),
                   ),
               ],
@@ -248,10 +240,6 @@ class _MaterialControlsState extends State<MaterialControls> {
         child: Container(
           child: Container(
             height: barHeight,
-            padding: EdgeInsets.only(
-              left: 8.0,
-              right: 8.0,
-            ),
             child: Icon(
               (_latestValue != null && _latestValue.volume > 0)
                   ? Icons.volume_up
@@ -270,10 +258,6 @@ class _MaterialControlsState extends State<MaterialControls> {
         height: barHeight,
         color: Colors.transparent,
         margin: EdgeInsets.only(left: 8.0, right: 4.0),
-        padding: EdgeInsets.only(
-          left: 12.0,
-          right: 12.0,
-        ),
         child: Icon(
           controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
           color: Colors.white,
@@ -287,13 +271,10 @@ class _MaterialControlsState extends State<MaterialControls> {
         ? _latestValue.position
         : Duration.zero;
 
-    return Padding(
-      padding: const EdgeInsets.only(right: 16.0),
-      child: Text(
-        '${formatDuration(position)}',
-        style:
-            Theme.of(context).textTheme.caption.copyWith(color: Colors.white),
-      ),
+    return Text(
+      '${formatDuration(position)}',
+      style:
+          Theme.of(context).textTheme.caption.copyWith(color: Colors.white),
     );
   }
 
@@ -302,13 +283,10 @@ class _MaterialControlsState extends State<MaterialControls> {
         ? _latestValue.duration - _latestValue.position
         : Duration(seconds: 0);
 
-    return Padding(
-      padding: EdgeInsets.only(left: 12.0),
-      child: Text(
-        '-${formatDuration(position)}',
-        style:
-            Theme.of(context).textTheme.caption.copyWith(color: Colors.white),
-      ),
+    return Text(
+      '-${formatDuration(position)}',
+      style:
+          Theme.of(context).textTheme.caption.copyWith(color: Colors.white),
     );
   }
 

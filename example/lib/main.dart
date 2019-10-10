@@ -44,7 +44,7 @@ class _ChewieDemoState extends State<ChewieDemo> {
       looping: true,
       allowMuting: false,
       allowFullScreen: true,
-      isLive: true,
+      isLive: false,
       livePlaceHolder: Container(
         color: Colors.red,
       ),
